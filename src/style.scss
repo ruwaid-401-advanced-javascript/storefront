@@ -44,4 +44,15 @@
   display: flex;
   justify-content: space-evenly;
   align-items: flex-start;
+  margin: 2%;
+  min-height: 300px;;
+}
+
+.simpleCart{
+  position: absolute;
+  right: 0;
+  top: 130px;
+  .divSimpleCart{
+    left: 0;
+  }
 }
