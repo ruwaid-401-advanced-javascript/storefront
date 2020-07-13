@@ -24,4 +24,4 @@
 
 #### UML
 
-![UML Diagram](./assets/lab-38.JPG)
+![UML Diagram](./assets/lab-38.png)
