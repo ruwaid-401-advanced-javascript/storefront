@@ -1,25 +1,27 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { show } from '../store/categories.js';
+import { Button } from '@material-ui/core';
+
 
 const categories = props => {
     return (
         <section key='section' className="categories">
             <div key='div'>Browse OUR categories</div>
-            <ul key='ul'>
+            <span key='ul'>
                 {props.categories.categories.map(element => {
                     return (
-                        <React.Fragment key={element.displayName+'d'}>
-                            <li key={element.displayName} onClick={() => props.show(element.name)}>
+                        <React.Fragment key={element.displayName}>
+                            <Button onClick={() => props.show(element.name)}>
                                 {element.displayName}
-                            </li>
-                            <p key={element.name + 'p'}>|</p>
+                            </Button>
+                            <p>|</p>
                         </React.Fragment>
 
                     )
                 })}
 
-            </ul>
+            </span>
 
         </section>
     );

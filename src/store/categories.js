@@ -1,8 +1,8 @@
 let initialState = {
   categories: [
-    { name: 'electronics', displayName: 'Elecronics' },
-    { name: 'food', displayName: 'Food' },
-    { name: 'clothing', displayName: 'Clothing' },
+    { name: 'electronics', displayName: 'Elecronics', discription:'here is the discription for electronnics'},
+    { name: 'food', displayName: 'Food', discription:'here is the discription for food' },
+    { name: 'clothing', displayName: 'Clothing', discription:'here is the discription for clothing' },
   ],
   products: [
     { name: 'TV', category: 'electronics', price: 699.00, inStock: 5 },

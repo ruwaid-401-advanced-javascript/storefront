@@ -9,7 +9,7 @@ function Header(props) {
     <header className='mainHeader'>
       <div>
         <h1>
-        Our Store
+        Scripters Store
         </h1>
         <h2>Cart ({props.cart})</h2>
       </div>
