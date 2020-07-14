@@ -1,10 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { show } from '../store/categories.js';
 import { Button } from '@material-ui/core';
+import * as actions from '../store/categories.js'
 
+function Categories(props) {
+    useEffect(() => {
+        props.get();
+        props.getCat();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
-const categories = props => {
     return (
         <section key='section' className="categories">
             <div key='div'>Browse OUR categories</div>
@@ -17,23 +22,24 @@ const categories = props => {
                             </Button>
                             <p>|</p>
                         </React.Fragment>
-
                     )
                 })}
-
             </span>
-
         </section>
     );
 }
 
 // we only care about the totalVotes to be displayed
 const mapStateToProps = state => ({
-    categories: state.categories
+    categories: state.categories,
 });
 
-const mapDispatchToProps = { show };
+
+const mapDispatchToProps = (dispatch, getState) => ({
+    get: () => dispatch(actions.getRemoteData()),
+    getCat: () => dispatch(actions.getRemoteCategories()),
+    show: (name) => dispatch(actions.show(name)),
+});
 
 
-// connecting my component with the mapState to props to be able to use the store.
-export default connect(mapStateToProps, mapDispatchToProps)(categories);
+export default connect(mapStateToProps, mapDispatchToProps)(Categories);

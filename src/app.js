@@ -7,6 +7,7 @@ import './style.scss';
 import Products from './components/products.js';
 import ActiveCategory from './components/activeCategory.js';
 import SimpleCart from './components/simpleCart .js';
+// import GetCategory from './components/getCategory.js';
 
 export default props => {
     return (
@@ -17,6 +18,7 @@ export default props => {
             <ActiveCategory/>
             <Products/>
             <Footer/>
+            {/* <GetCategory/> */}
         </>
     )
 };
