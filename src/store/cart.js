@@ -11,7 +11,6 @@ export default (state = initialState, action) => {
       payload.results.forEach(element => {
         state.cartItem2.push(element.userName)
       });
-      // state.cartItem2 = [...payload.results];
       console.log(state.cartItem2);
       return { cartItem2: state.cartItem2 };
 
@@ -22,18 +21,6 @@ export default (state = initialState, action) => {
 
       return { results: state.cartItem2 };
 
-
-
-    // case 'TOCART':
-    //   state.cartItem.push(payload);
-    //   return {
-    //     categories: state.categories,
-    //     products: state.products,
-    //     activeCategory: state.activeCategory,
-    //     cartItem: state.cartItem
-    //   };
-
-
     default:
       return state;
   }
@@ -41,12 +28,9 @@ export default (state = initialState, action) => {
 
 let api = 'https://rowaid-server.herokuapp.com/api/v1/cart';
 
-// this dispatch is not the "dispatch" from redux
 export const getRemoteDataAPI = () => dispatch => {
-  // console.log('hiiiiiiiii');
   return superagent.get(api)
     .then(data => {
-      // console.log(data.body,'ooooooooo');
       dispatch(getAction2(data.body))
     });
 }
@@ -59,7 +43,6 @@ export const putRemoteData = (id, data) => async dispatch => {
 }
 
 export const addRemoteDataAPI = (data) => async dispatch => {
-  // console.log(data);
   let sendData = {
     userName: data.name,
     userID: data._id,
@@ -67,22 +50,11 @@ export const addRemoteDataAPI = (data) => async dispatch => {
   }
 
   let response = await superagent.post(`${api}`).send(sendData);
-  // dispatch action for the update
   dispatch(addAction(response))
-  // console.log(response)
 }
 
-// we are not dispatching the obj
-// dispatch({
-//     type: 'GET',
-//     payload: payload
-// })
-
-// we are dispatching the function of the action
-// dispatch(getAction())
 
 export const getAction2 = payload => {
-  // console.log(payload,'yyyyy');
   return {
     type: 'GETCart',
     payload: payload
@@ -90,7 +62,6 @@ export const getAction2 = payload => {
 }
 
 export const addAction = payload => {
-  // console.log(payload,'yyyyy');
   return {
     type: 'ADD',
     payload: payload

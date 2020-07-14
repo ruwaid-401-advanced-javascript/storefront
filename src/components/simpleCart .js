@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Button } from '@material-ui/core';
 import * as actions from '../store/categories.js'
-import * as actionsCart from '../store/actions.js'
+import * as actionsCart from '../store/cart.js'
 // import * as actionsCart from '../store/actions.js'
 
 
@@ -17,21 +17,18 @@ function SimpleCart(props) {
 
   const deleteProductsfromCart = (element) => {
     props.deleteItem(element)
-    element.inStock++;
-    props.deleteItemData(element._id, element)
+    // element.inStock++;
+    // props.deleteItemData(element._id, element)
   }
-  // console.log(props,'qqqqqqqqqqqqqqqqqqqq');
-  // console.log(props.cart.cartItem2,'qqqqqqqqqqqqqqqqqqqq');
+
   
 
   return (
     <section key='section' className="simpleCart">
-      {/* {console.log(props.categories,'ooooooooooooooooooo')} */}
-      {/* {console.log(props.cart.cartItem2,'vvvvvvvvvvvvvvvvvv')} */}
       {props.categories.cartItem.map((element, i) => {
         return (
           <div key={i} className='divSimpleCart'>
-            <span key={i}>{element.name}</span>
+            <span key={i}>{element}</span>
             <Button key={i + 'b'} onClick={(e) => deleteProductsfromCart(element)}>
               X
               </Button>

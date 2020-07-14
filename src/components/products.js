@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../store/categories.js'
+import { toCart } from '../store/categories.js';
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -9,8 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-// import * as actionsCart from '../store/actions.js'
-
 
 const useStyles = makeStyles({
   root: {
@@ -20,14 +19,12 @@ const useStyles = makeStyles({
     height: 140,
   },
 });
+
 const Status = props => {
   const classes = useStyles();
 
-  const updateProducts = (element) => {
-    props.toCart(element)
-    // props.toCartAPI(element);
-    element.inStock--;
-    props.put(element._id,element)
+  const updateFunctions = element => {
+    props.toCart(element.name)
   }
 
   return (
@@ -47,15 +44,15 @@ const Status = props => {
                     {element.name}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="p">
-                    {element.inStock}
+                    {element.description}
                   </Typography>
                   <Typography gutterBottom variant="h5" component="p">
-                    {element.description}
+                    {element.inStock}
                   </Typography>
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button onClick={() => updateProducts(element)} size="small" color="primary">
+                <Button onClick={() => updateFunctions(element)} size="small" color="primary">
                   ADD To Cart
                 </Button>
                 <Button size="small" color="primary">
@@ -77,12 +74,8 @@ const Status = props => {
 const mapStateToProps = state => ({
   categories: state.categories
 });
+const mapDispatchToProps = { toCart };
 
-const mapDispatchToProps = (dispatch, getState) => ({
-  put: (id, data) => dispatch(actions.putRemoteData(id, data)),
-  toCart: (name) => dispatch(actions.toCart(name)),
-  // toCartAPI: (name) => dispatch(actionsCart.addRemoteDataAPI(name))
-});
 
 // connecting my component with the mapState to props to be able to use the store.
 export default connect(mapStateToProps, mapDispatchToProps)(Status);
