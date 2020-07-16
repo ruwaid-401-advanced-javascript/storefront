@@ -1,37 +1,42 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Button } from '@material-ui/core';
-import * as actions from '../store/categories.js'
-import * as actionsCart from '../store/cart.js'
-// import * as actionsCart from '../store/actions.js'
 
+
+import * as actions from '../store/cartReducer.js'
+import * as actionsProd from '../store/productsReducer.js'
+
+import { Button } from '@material-ui/core';
 
 
 function SimpleCart(props) {
 
   useEffect(() => {
-    props.fromCartAPI()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    props.getCartAPI();
+    // props.createCart();
+
   }, []);
 
 
-  const deleteProductsfromCart = (element) => {
-    props.deleteItem(element)
-    // element.inStock++;
-    // props.deleteItemData(element._id, element)
+  const deleteProductsfromCart = (idx, element) => {
+    props.removeFromCart(idx);
+    props.incrementInStock(element);
+    props.updateRemoteCart(props.cartState.cartItem)
+
   }
 
-  
+
 
   return (
     <section key='section' className="simpleCart">
-      {props.categories.cartItem.map((element, i) => {
+      {props.cartState.cartItem.map((element, i) => {
         return (
           <div key={i} className='divSimpleCart'>
-            <span key={i}>{element}</span>
-            <Button key={i + 'b'} onClick={(e) => deleteProductsfromCart(element)}>
+            <span >{element.name}</span>
+            <Button onClick={(e) => deleteProductsfromCart(i, element)}>
               X
-              </Button>
+            </Button>
           </div>
         )
 
@@ -41,17 +46,18 @@ function SimpleCart(props) {
 }
 
 const mapStateToProps = state => ({
-  categories: state.categories,
-  // cart: state.actions,
+  cartState: state.cart,
 });
 
 
 
 const mapDispatchToProps = (dispatch, getState) => ({
-  deleteItemData: (id, data) => dispatch(actions.deleteItemData(id, data)),
-  deleteItem: (idx) => dispatch(actions.deleteItem(idx)),
-  fromCartAPI: () => dispatch(actionsCart.getRemoteDataAPI())
-
+  getCartAPI: () => dispatch(actions.getCartAPI()),
+  createCart: () => dispatch(actions.createCart()),
+  updateRemoteCart: (product) => dispatch(actions.updateRemoteCart(product)),
+  removeFromCart: (productidx) => dispatch(actions.removeFromCart(productidx)),
+  incrementInStock: (product) => dispatch(actionsProd.incrementInStock(product))
 });
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleCart);

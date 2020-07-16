@@ -1,13 +1,15 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+
+import * as actions from '../store/categoriesReducer.js'
+
+// Meterial UI Components
 import { Button } from '@material-ui/core';
-import * as actions from '../store/categories.js'
 
 function Categories(props) {
     useEffect(() => {
-        props.get();
         props.getCat();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     return (
@@ -17,7 +19,7 @@ function Categories(props) {
                 {props.categories.categories.map(element => {
                     return (
                         <React.Fragment key={element.displayName}>
-                            <Button onClick={() => props.show(element.name)}>
+                            <Button onClick={() => props.changeActiveCategory(element.name)}>
                                 {element.displayName}
                             </Button>
                             <p>|</p>
@@ -36,9 +38,8 @@ const mapStateToProps = state => ({
 
 
 const mapDispatchToProps = (dispatch, getState) => ({
-    get: () => dispatch(actions.getRemoteData()),
     getCat: () => dispatch(actions.getRemoteCategories()),
-    show: (name) => dispatch(actions.show(name)),
+    changeActiveCategory: (name) => dispatch(actions.changeActiveCategory(name)),
 });
 
 

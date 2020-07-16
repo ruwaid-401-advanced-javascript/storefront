@@ -1,7 +1,11 @@
-import React from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { toCart } from '../store/categories.js';
 
+import * as actions from '../store/productsReducer'
+import * as actionsCart from '../store/cartReducer'
+
+// Meterial UI Components
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -23,14 +27,22 @@ const useStyles = makeStyles({
 const Status = props => {
   const classes = useStyles();
 
+
+  useEffect(()=>{
+    props.getProd();
+
+  },[]);
+
   const updateFunctions = element => {
-    props.toCart(element.name)
+    props.addToCart(element)
+    props.decrementInStock(element)
+    props.updateRemoteCart(props.cartState.cartItem)
   }
 
   return (
     <section className='products' >
-      {props.categories.products.map(element => {
-        if (element.category === props.categories.activeCategory) {
+      {props.productState.products.map(element => {
+        if (element.category === props.categoryState.activeCategory) {
           return (
             <Card key={element.name} className={classes.root}>
               <CardActionArea>
@@ -70,11 +82,21 @@ const Status = props => {
   );
 }
 
-// we only care about the totalVotes to be displayed
+
 const mapStateToProps = state => ({
-  categories: state.categories
+  productState: state.products,
+  categoryState: state.categories,
+  cartState: state.cart,
 });
-const mapDispatchToProps = { toCart };
+
+
+const mapDispatchToProps = (dispatch, getState) => ({
+  getProd: () => dispatch(actions.getRemoteProducts()),
+  decrementInStock: (product) => dispatch(actions.decrementInStock(product)),
+  addToCart: (product) => dispatch(actionsCart.addAction(product)),
+  updateRemoteCart: (product) => dispatch(actionsCart.updateRemoteCart(product)),
+
+});
 
 
 // connecting my component with the mapState to props to be able to use the store.

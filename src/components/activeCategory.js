@@ -4,12 +4,15 @@ import { connect } from 'react-redux';
 const activeCategory = props => {
   return (
     <section className='activeCategory'>
-      {props.categories.categories.map(element => {
-        if (element.name === props.categories.activeCategory) {
+      {props.categoriesState.categories.map((element, i) => {
+        if (element.name === props.categoriesState.activeCategory) {
           return (
-            <div key='activeCategory' >
-              {element.discription}
-            </div>
+            <React.Fragment key={i}>
+              <h2 >{element.displayName}</h2>
+              <div >
+                {element.discription}
+              </div>
+            </React.Fragment>
           )
         }
         return null
@@ -21,7 +24,7 @@ const activeCategory = props => {
 
 // we only care about the totalVotes to be displayed
 const mapStateToProps = state => ({
-  categories: state.categories
+  categoriesState: state.categories
 });
 
 // connecting my component with the mapState to props to be able to use the store.
