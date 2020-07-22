@@ -1,5 +1,6 @@
-
 # LAB - Class 39
+
+
 
 ## Project: storefront
 
@@ -9,6 +10,7 @@
 
 - [submission PR](https://github.com/ruwaid-401-advanced-javascript/storefront/pull/3)
 - [Github actions](https://github.com/ruwaid-401-advanced-javascript/storefront/pull/3/checks)
+
 
 
 ## Modules
@@ -24,4 +26,6 @@
 
 #### UML
 
+
 ![UML Diagram](./assets/lab-38.png)
+
