@@ -11,7 +11,7 @@ function Header(props) {
         <h1>
         Scripters Store
         </h1>
-        <h2>Cart ({props.cart})</h2>
+        <h2>Cart ({props.cart.cartItem.length})</h2>
       </div>
     </header>
 
@@ -21,7 +21,7 @@ function Header(props) {
 
 // we only care about the totalVotes to be displayed
 const mapStateToProps = state => ({
-  cart: state.categories.cart
+  cart: state.categories
 });
 
 // connecting my component with the mapState to props to be able to use the store.

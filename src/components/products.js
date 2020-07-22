@@ -1,5 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { toCart } from '../store/categories.js';
+
+
+
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -29,7 +33,7 @@ const Status = props => {
               <CardActionArea>
                 <CardMedia
                   className={classes.media}
-                  image="https://via.placeholder.com/150"
+                  image={`https://source.unsplash.com/random?${element.name}`}
                   title= {element.name}
                 />
                 <CardContent>
@@ -39,7 +43,7 @@ const Status = props => {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button onClick={() => props.toCart(element.name)} size="small" color="primary">
                   ADD To Cart
                 </Button>
                 <Button size="small" color="primary">
@@ -53,7 +57,6 @@ const Status = props => {
           return null
         })}
 
-      {/* </ul> */}
     </section>
   );
 }
@@ -62,6 +65,8 @@ const Status = props => {
 const mapStateToProps = state => ({
   categories: state.categories
 });
+const mapDispatchToProps = { toCart };
+
 
 // connecting my component with the mapState to props to be able to use the store.
-export default connect(mapStateToProps)(Status);
+export default connect(mapStateToProps,mapDispatchToProps)(Status);
