@@ -52,7 +52,13 @@
   position: absolute;
   right: 0;
   top: 130px;
+  z-index: 99;
   .divSimpleCart{
     left: 0;
   }
+}
+
+.imgPro{
+  width: 50px;
+  height: 50px;
 }

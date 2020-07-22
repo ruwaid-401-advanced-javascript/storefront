@@ -1,4 +1,5 @@
-# LAB - Class 38
+# LAB - Class 39
+
 
 
 ## Project: storefront
@@ -7,9 +8,8 @@
 
 ### Links and Resources
 
-
-- [submission PR](https://github.com/ruwaid-401-advanced-javascript/todo/pull/2)
-- [Github actions](https://github.com/ruwaid-401-advanced-javascript/resty/pull/2/checks)
+- [submission PR](https://github.com/ruwaid-401-advanced-javascript/storefront/pull/3)
+- [Github actions](https://github.com/ruwaid-401-advanced-javascript/storefront/pull/3/checks)
 
 
 
